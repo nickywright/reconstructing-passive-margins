@@ -23,8 +23,8 @@ Code for reconstructing passive margin paleobathymetry
 
 ## Workflow procedure
 - Specify the following files in `01_run_subsidence.py`:
-    + Set the *`data_dir`* variable to the location of all your files (plate model files, ETOPO, etc.)
-    + Set *`COB_terrane_file`*, `isocob_features`, and `rotation_file` to match their filenames
+    + Set the `data_dir` variable to the location of all your files (plate model files, ETOPO, etc.)
+    + Set `COB_terrane_file`, `isocob_features`, and `rotation_file` to match their filenames
     + Set `etopo_file` to match your ETOPO filename (note: this should be in metres)
     + Set `sedimentthickness_file` to match your sediment thickness grid filename (note: this should be in metres)
     + Set `no_iterations`:
