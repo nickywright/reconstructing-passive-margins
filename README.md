@@ -34,8 +34,8 @@ Code for reconstructing passive margin paleobathymetry
       `python 01_run_subsidence.py`
     + This script will output a text file (`subsidenceinfo_[date].txt`)
 - Specify the following files in `02_create_paleobathymetry.py`:
-    + Set the *`data_dir`* variable to the location of all your files (plate model files, ETOPO, etc.)
-    + Set *`rotation_file`* and `static_polygon_file` to match their filenames
+    + Set the `data_dir` variable to the location of all your files (plate model files, ETOPO, etc.)
+    + Set `rotation_file` and `static_polygon_file` to match their filenames
     + Set `passivemarginfile` to match its filename. This is a polygon gpml that outlines all passive margins to be reconstructed, in case you don't want to reconstruct all regions.
     + Set `grid_spacing` to be your desired output grid resolution (i.e. 0.1 for 0.1d)
     + Set `min_time`, `max_time`, and `time_step` to be your desired output times
