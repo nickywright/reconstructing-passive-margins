@@ -3,7 +3,9 @@
 # ---
 # --- Passive margins are reconstructed through time based on subsidence parameters
 # --- from part 1 (01_run_subsidence.py), and the desired plate model, and sedimentation
-# --- model (e.g. constant sedimentatation; or sedimentation that keeps up with subsidence
+# --- model (e.g. constant sedimentatation; or sedimentation that keeps up with subsidence.
+# --- To speed up the amount of time this takes (if creating grids for 200 Myrs), this
+# --- script uses multiprocessing to use most of your CPUs.
 # ---
 # --- Inputs:
 #           - Rotation file (as .rot)
@@ -72,6 +74,9 @@ start_time = time.time()
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Should not need to modify anything below here
+
+multiprocessing.set_start_method("fork")  # set multiprocessing, since 'spawn' does weird things 
+
 # ---------------------- Read in files ----------------------------------
 # --- Read in relevant files to pygplates
 print("... Importing input files")
