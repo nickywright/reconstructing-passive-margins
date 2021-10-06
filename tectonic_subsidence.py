@@ -14,7 +14,7 @@ import nlopt
 # import itertools
 import time
 
-from gprm.utils import points_in_polygons
+from ptt.utils import points_in_polygons
 from gprm.utils.create_gpml import create_gpml_regular_long_lat_mesh, create_gpml_healpix_mesh
 from gprm.utils.sphere import sampleOnSphere,healpix_mesh
 from gprm.utils.spatial import force_polygon_geometries
