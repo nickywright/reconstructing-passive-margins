@@ -39,16 +39,40 @@ from gprm.utils.sphere import sampleOnSphere
 
 # ------------------------- Set parameters and files ------------------------------------
 # --- Input files
-data_dir = 'input_data'
-COBterrane_file = '%s/Global_EarthByte_GeeK07_COB_Terranes_2019_v2.gpml' % data_dir
-isocob_features = '%s/Global_EarthByte_GeeK07_IsoCOB_2019_v2.gpml' % data_dir
-rotation_file = '%s/Global_410-0Ma_Rotations_2019_v2.rot' % data_dir
-etopo_file = '%s/ETOPO1_ice_smoothed_20km_01d_all_rg.nc' % data_dir  # this has been smoothed using grdfilter
-sedimentthickness_file = '%s/GlobSed-v2_6m_clipped.nc' % data_dir
+# data_dir = 'input_data'
+
+# modified for 2022_v2
+plate_model_dir = '/Users/nickywright/repos/usyd/EarthBytePlateMotionModel-ARCHIVE/Global_Model_WD_Internal_Release_2022_v2'
+
+rotation_filenames = [
+    '%s/Alps_Mesh_Rotations.rot' % plate_model_dir,
+    '%s/Andes_Flat_Slabs_Rotations.rot' % plate_model_dir,
+    '%s/Andes_Rotations.rot' % plate_model_dir,
+    '%s/Australia_Antarctica_Mesh_Rotations.rot' % plate_model_dir,
+    '%s/Australia_North_Zealandia_Rotations.rot' % plate_model_dir,
+    '%s/Eurasia_Arabia_Mesh_Rotations.rot' % plate_model_dir,
+    '%s/Global_250-0Ma_Rotations.rot' % plate_model_dir,
+    '%s/Global_410-250Ma_Rotations.rot' % plate_model_dir,
+    '%s/North_America_Flat_Slabs_Rotations.rot' % plate_model_dir,
+    '%s/North_America_Mesh_Rotations.rot' % plate_model_dir,
+    '%s/North_China_Mesh_Rotations.rot' % plate_model_dir,
+    '%s/South_Atlantic_Rotations.rot' % plate_model_dir,
+    '%s/South_China_DeformingModel.rot' % plate_model_dir,
+    '%s/Southeast_Asia_Rotations.rot' % plate_model_dir]
+
+COBterrane_file = '%s/StaticGeometries/AgeGridInput/Global_EarthByte_GeeK07_COB_Terranes.gpml' % plate_model_dir
+isocob_features = '%s/StaticGeometries/AgeGridInput/Global_EarthByte_GeeK07_IsoCOB.gpml' % plate_model_dir
+
+# rotation_file = '%s/Global_410-0Ma_Rotations_2019_v2.rot' % data_dir
+# etopo_file = '%s/ETOPO1_ice_smoothed_20km_01d_all_rg.nc' % data_dir  # this has been smoothed using grdfilter
+etopo_file = '/Users/nickywright/Data/Bathymetry_Topography/ETOPO/ETOPO1_Ice_g_6m_Rd.nc'
+# sedimentthickness_file = '%s/GlobSed-v2_6m_clipped.nc' % data_dir
+sedimentthickness_file = '/Users/nickywright/Data/SedimentThickness/GlobSed_package2/GlobSed-v2.nc'
+
 
 # --- Parameters
-lon_min = 0.
-lon_max = 360.
+lon_min = -180.
+lon_max = 180.
 lat_min = -90.
 lat_max = 90.
 
@@ -65,7 +89,7 @@ today = time.strftime("%Y%m%d")  # get today's date in YYYYMMDD format - for cre
 # --- Read in relevant files to pygplates
 print("... Importing input files")
 cobter = pygplates.FeatureCollection(COBterrane_file)
-rotation_model = pygplates.RotationModel(rotation_file)
+rotation_model = pygplates.RotationModel(rotation_filenames)
 cob_lines = pygplates.FeatureCollection(isocob_features)
 
 # --------------------------------------------------------
@@ -169,6 +193,6 @@ out_lat, out_lon, out_opt, out_xopt, out_minf, out_pres, out_pree, out_psedThick
 tmp = np.vstack((out_lon, out_lat, out_depths, out_psedThicks, out_pres, out_pree, out_xopt, out_minf))
 header_add = "Longitude Latitude Bathymetry_m SedimentThickness_m RiftStart_Ma RiftEnd_Ma OptimisedBetaFactor DepthMismatch_m"
 format='%0.1f\t%0.1f\t%0.1f\t%0.1f\t%0.1f\t%0.1f\t%0.6f\t%0.6f'
-print('... saving outpput file as subsidenceinfo_' + str(today) + '.txt')
+print('... saving output file as subsidenceinfo_' + str(today) + '.txt')
 np.savetxt('subsidenceinfo_' + str(today) + '.txt', tmp.T, fmt=format, header=header_add)
 print("Done!!")
