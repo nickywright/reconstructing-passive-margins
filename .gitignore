@@ -1,0 +1,15 @@
+# gitignore
+
+.DS_Store
+
+.ipynb_checkpoints/*
+.virtual_documents/*
+
+__pycache__
+
+gmt.history
+
+*/.DS_Store
+
+*/*.nc
+*/*.xyz
